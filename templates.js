@@ -1,0 +1,18 @@
+_(Uni).extend({
+    templates: {},
+    getTemplate: function (name) {
+        return this.templates[name] || name;
+    },
+    setTemplate: function (name, newName) {
+        return this.templates[name] = newName;
+    }
+});
+
+_(Uni.Plugin.prototype).extend({
+    getTemplate: function (name) {
+        return this.registry.templates[name] || Uni.getTemplate(name);
+    },
+    setTemplate: function (name, newName) {
+        return this.registry.templates[name] = newName;
+    }
+});
