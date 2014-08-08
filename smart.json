@@ -1,0 +1,7 @@
+{
+    "name": "Universe CMS Plugin package",
+    "git": "git@bitbucket.org:vazco/universe-core.git",
+    "packages": {
+        "simple-schema": {}
+    }
+}
