@@ -1,12 +1,13 @@
 Package.describe({
+    name: 'vazco:universe-core-plugin',
     summary: 'Universe CMS Plugin package'
 });
 
 Package.on_use(function (api) {
     api.use([
-        'universe-core',
+        'vazco:universe-core',
         'underscore',
-        'simple-schema'
+        'aldeed:simple-schema'
     ]);
 
     api.imply([
