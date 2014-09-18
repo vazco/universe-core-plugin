@@ -1,25 +1,10 @@
-UniPlugin.plugins = [];
-
-UniPlugin.init = function (cb) {
-    _(this.plugins).each(function (plugin) {
-        plugin.init();
-    });
-    if (_.isFunction(cb)) {
-        cb();
-    }
-};
-
-UniPlugin = function(name, options) {
+UniPlugin = function(name) {
     if (!(this instanceof UniPlugin)) {
         throw new Error('UniPlugin must be created with "new" keyword');
     }
-    options = _(options || {}).defaults({
-        path: '/' + name.toLowerCase()
-    });
 
     this.name = name;
     this.initialized = false;
-    this.path = options.path;
     this.registry = {
         templates: {},
         routes: {},
@@ -32,8 +17,19 @@ UniPlugin = function(name, options) {
         afterHooks: {}
     };
 
-    UniPlugin.plugins.push(this);
+    this.constructor.plugins = this.constructor.plugins || [];
+    this.constructor.plugins.push(this);
+
     console.log('Created new plugin', this.name, this);
+};
+
+UniPlugin.init = function (cb) {
+    _(this.plugins).each(function (plugin) {
+        plugin.init();
+    });
+    if (_.isFunction(cb)) {
+        cb();
+    }
 };
 
 // We need this to make singular camelCase function name
@@ -46,6 +42,65 @@ var _toUpperPlural = function (name) {
     return name[0].toUpperCase() + name.substr(1, name.length - 1);
 };
 
+
+// fake functions for autocomplete
+UniPlugin.prototype.addMethod = function(){};
+UniPlugin.prototype.addMethods= function(){};
+UniPlugin.prototype.removeMethod= function(){};
+UniPlugin.prototype.getMethod= function(){};
+
+UniPlugin.prototype.addBeforeHook= function(){};
+UniPlugin.prototype.addBeforeHooks= function(){};
+UniPlugin.prototype.removeBeforeHook= function(){};
+UniPlugin.prototype.getBeforeHook= function(){};
+
+UniPlugin.prototype.addAfterHook= function(){};
+UniPlugin.prototype.addAfterHooks= function(){};
+UniPlugin.prototype.removeAfterHook= function(){};
+UniPlugin.prototype.getAfterHook= function(){};
+
+UniPlugin.prototype.addCollection= function(){};
+UniPlugin.prototype.addCollections= function(){};
+UniPlugin.prototype.removeCollection= function(){};
+UniPlugin.prototype.getCollection= function(){};
+
+var mechanisms = [
+    'methods',
+    'beforeHooks',
+    'afterHooks',
+    'collections'
+];
+
+if(Meteor.isClient){
+
+    mechanisms.push('routes');
+
+    UniPlugin.prototype.addRoute= function(){};
+    UniPlugin.prototype.addRoutes= function(){};
+    UniPlugin.prototype.removeRoute= function(){};
+    UniPlugin.prototype.getRoute= function(){};
+
+    UniPlugin.prototype.addEvent= function(){};
+    UniPlugin.prototype.addEvents= function(){};
+    UniPlugin.prototype.removeEvent= function(){};
+    UniPlugin.prototype.getEvent= function(){};
+
+    UniPlugin.prototype.addHelper= function(){};
+    UniPlugin.prototype.addHelpers= function(){};
+    UniPlugin.prototype.removeHelper= function(){};
+    UniPlugin.prototype.getHelper= function(){};
+
+} else {
+
+    mechanisms.push('publications');
+
+    UniPlugin.prototype.addPublication= function(){};
+    UniPlugin.prototype.addPublications= function(){};
+    UniPlugin.prototype.removePublication= function(){};
+    UniPlugin.prototype.getPublication= function(){};
+}
+
+
 // Provides add/remove/get for
 // collections, methods, beforeHooks,
 // afterHooks, routes, publications,
@@ -56,17 +111,6 @@ var _toUpperPlural = function (name) {
 
 // All the magic happens in init functions that
 // are in other files in this folder.
-
-var mechanisms = [
-    'methods',
-    'beforeHooks',
-    'afterHooks',
-    'collections'
-];
-
-Meteor.isClient ?
-    mechanisms.push('routes') :
-    mechanisms.push('publications');
 
 _(mechanisms).each(function (mechanism) {
 
@@ -97,14 +141,14 @@ _(mechanisms).each(function (mechanism) {
     };
 });
 
-_(['events', 'helpers']).each(function (mechanism) {
+if (Meteor.isClient) {
+    _(['events', 'helpers']).each(function (mechanism) {
 
-    var mechanismUpper = _toUpperSingular(mechanism);
-    var mechanismUpperPlural = _toUpperPlural(mechanism);
+        var mechanismUpper = _toUpperSingular(mechanism);
+        var mechanismUpperPlural = _toUpperPlural(mechanism);
 
-    // addEvent and addHelper functions.
-    UniPlugin.prototype['add' + mechanismUpper] = function (template, name, obj) {
-        if (Meteor.isClient) {
+        // addEvent and addHelper functions.
+        UniPlugin.prototype['add' + mechanismUpper] = function (template, name, obj) {
             // Because we can override templates, we need to look
             // using getTemplate to find out the right template.
             var actualTemplate = this.getTemplate(template),
@@ -117,46 +161,40 @@ _(['events', 'helpers']).each(function (mechanism) {
             }
 
             mechanismRegister[actualTemplate][name] = obj;
-        }
-    };
+        };
 
 
-    // addHelpers and addEvents functions.
-    UniPlugin.prototype['add' + mechanismUpperPlural] = function (template, obj) {
-        if (Meteor.isClient) {
+        // addHelpers and addEvents functions.
+        UniPlugin.prototype['add' + mechanismUpperPlural] = function (template, obj) {
             var self = this;
             _(obj).each(function (prop, name) {
                 self['add' + mechanismUpper](template, name, prop);
             })
-        }
-    };
+        };
 
 
-    // removeEvent and removeHelper functions.
-    UniPlugin.prototype['remove' + mechanismUpper] = function (template, name) {
-        if (Meteor.isClient) {
+        // removeEvent and removeHelper functions.
+        UniPlugin.prototype['remove' + mechanismUpper] = function (template, name) {
             var actualTemplate = this.getTemplate(template),
                 mechanismRegister = this.registry[mechanism];
 
             mechanismRegister[actualTemplate] = mechanismRegister[actualTemplate] || {};
 
             delete mechanismRegister[actualTemplate][name];
-        }
-    };
+        };
 
 
-    // getEvent and getHelper functions.
-    UniPlugin.prototype['get' + mechanismUpper] = function (template, name) {
-        if (Meteor.isClient) {
+        // getEvent and getHelper functions.
+        UniPlugin.prototype['get' + mechanismUpper] = function (template, name) {
             var actualTemplate = this.getTemplate(template),
                 mechanismRegister = this.registry[mechanism];
 
             if (mechanismRegister[actualTemplate]) {
                 return mechanismRegister[actualTemplate][name];
             }
-        }
-    };
-});
+        };
+    });
+}
 
 _(UniPlugin.prototype).extend({
     inits: [],

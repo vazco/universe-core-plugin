@@ -11,7 +11,7 @@ Package.on_use(function (api) {
     ]);
 
     api.imply([
-        'universe-core'
+        'vazco:universe-core'
     ]);
 
     api.add_files([
