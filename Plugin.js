@@ -42,65 +42,6 @@ var _toUpperPlural = function (name) {
     return name[0].toUpperCase() + name.substr(1, name.length - 1);
 };
 
-
-// fake functions for autocomplete
-UniPlugin.prototype.addMethod = function(){};
-UniPlugin.prototype.addMethods= function(){};
-UniPlugin.prototype.removeMethod= function(){};
-UniPlugin.prototype.getMethod= function(){};
-
-UniPlugin.prototype.addBeforeHook= function(){};
-UniPlugin.prototype.addBeforeHooks= function(){};
-UniPlugin.prototype.removeBeforeHook= function(){};
-UniPlugin.prototype.getBeforeHook= function(){};
-
-UniPlugin.prototype.addAfterHook= function(){};
-UniPlugin.prototype.addAfterHooks= function(){};
-UniPlugin.prototype.removeAfterHook= function(){};
-UniPlugin.prototype.getAfterHook= function(){};
-
-UniPlugin.prototype.addCollection= function(){};
-UniPlugin.prototype.addCollections= function(){};
-UniPlugin.prototype.removeCollection= function(){};
-UniPlugin.prototype.getCollection= function(){};
-
-var mechanisms = [
-    'methods',
-    'beforeHooks',
-    'afterHooks',
-    'collections'
-];
-
-if(Meteor.isClient){
-
-    mechanisms.push('routes');
-
-    UniPlugin.prototype.addRoute= function(){};
-    UniPlugin.prototype.addRoutes= function(){};
-    UniPlugin.prototype.removeRoute= function(){};
-    UniPlugin.prototype.getRoute= function(){};
-
-    UniPlugin.prototype.addEvent= function(){};
-    UniPlugin.prototype.addEvents= function(){};
-    UniPlugin.prototype.removeEvent= function(){};
-    UniPlugin.prototype.getEvent= function(){};
-
-    UniPlugin.prototype.addHelper= function(){};
-    UniPlugin.prototype.addHelpers= function(){};
-    UniPlugin.prototype.removeHelper= function(){};
-    UniPlugin.prototype.getHelper= function(){};
-
-} else {
-
-    mechanisms.push('publications');
-
-    UniPlugin.prototype.addPublication= function(){};
-    UniPlugin.prototype.addPublications= function(){};
-    UniPlugin.prototype.removePublication= function(){};
-    UniPlugin.prototype.getPublication= function(){};
-}
-
-
 // Provides add/remove/get for
 // collections, methods, beforeHooks,
 // afterHooks, routes, publications,
@@ -111,6 +52,19 @@ if(Meteor.isClient){
 
 // All the magic happens in init functions that
 // are in other files in this folder.
+
+var mechanisms = [
+    'methods',
+    'beforeHooks',
+    'afterHooks',
+    'collections'
+];
+
+if(Meteor.isClient){
+    mechanisms.push('routes');
+} else {
+    mechanisms.push('publications');
+}
 
 _(mechanisms).each(function (mechanism) {
 
