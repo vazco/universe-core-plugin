@@ -5,9 +5,9 @@ Package.describe({
 
 Package.on_use(function (api) {
     api.use([
-        'vazco:universe-core',
         'underscore',
-        'aldeed:simple-schema'
+        'vazco:universe-core',
+        'iron:router'
     ]);
 
     api.imply([
@@ -29,4 +29,8 @@ Package.on_use(function (api) {
     api.add_files([
         'publications.js'
     ], 'server');
+
+    api.export([
+        'UniPlugin'
+    ])
 });

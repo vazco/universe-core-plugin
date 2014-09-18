@@ -1,4 +1,4 @@
-_(Uni).extend({
+_(UniPlugin).extend({
     templates: {},
     getTemplate: function (name) {
         return this.templates[name] || name;
@@ -8,9 +8,9 @@ _(Uni).extend({
     }
 });
 
-_(Uni.Plugin.prototype).extend({
+_(UniPlugin.prototype).extend({
     getTemplate: function (name) {
-        return this.registry.templates[name] || Uni.getTemplate(name);
+        return this.registry.templates[name] || UniPlugin.getTemplate(name);
     },
     setTemplate: function (name, newName) {
         return this.registry.templates[name] = newName;

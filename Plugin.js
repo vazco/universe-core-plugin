@@ -1,6 +1,6 @@
-Uni.plugins = [];
+UniPlugin.plugins = [];
 
-Uni.init = function (cb) {
+UniPlugin.init = function (cb) {
     _(this.plugins).each(function (plugin) {
         plugin.init();
     });
@@ -9,9 +9,9 @@ Uni.init = function (cb) {
     }
 };
 
-Uni.Plugin = function(name, options) {
-    if (!(this instanceof Uni.Plugin)) {
-        throw new Error('Uni.Plugin must be created with "new" keyword');
+UniPlugin = function(name, options) {
+    if (!(this instanceof UniPlugin)) {
+        throw new Error('UniPlugin must be created with "new" keyword');
     }
     options = _(options || {}).defaults({
         path: '/' + name.toLowerCase()
@@ -32,7 +32,7 @@ Uni.Plugin = function(name, options) {
         afterHooks: {}
     };
 
-    Uni.plugins.push(this);
+    UniPlugin.plugins.push(this);
     console.log('Created new plugin', this.name, this);
 };
 
@@ -73,7 +73,7 @@ _(mechanisms).each(function (mechanism) {
     var mechanismUpper = _toUpperSingular(mechanism);
     var mechanismUpperPlural = _toUpperPlural(mechanism);
 
-    Uni.Plugin.prototype['add' + mechanismUpper] = function (name, obj) {
+    UniPlugin.prototype['add' + mechanismUpper] = function (name, obj) {
         if (this.registry[mechanism][name]) {
             console.log(mechanismUpper + ' ' + name + ' already exists.');
         } else {
@@ -81,18 +81,18 @@ _(mechanisms).each(function (mechanism) {
         }
     };
 
-    Uni.Plugin.prototype['add' + mechanismUpperPlural] = function (obj) {
+    UniPlugin.prototype['add' + mechanismUpperPlural] = function (obj) {
         var self = this;
         _(obj).each(function (prop, name) {
             self['add' + mechanismUpper](name, prop);
         })
     };
 
-    Uni.Plugin.prototype['remove' + mechanismUpper] = function (name) {
+    UniPlugin.prototype['remove' + mechanismUpper] = function (name) {
         delete this.registry[mechanism][name];
     };
 
-    Uni.Plugin.prototype['get' + mechanismUpper] = function (name) {
+    UniPlugin.prototype['get' + mechanismUpper] = function (name) {
         return this.registry[mechanism][name];
     };
 });
@@ -103,7 +103,7 @@ _(['events', 'helpers']).each(function (mechanism) {
     var mechanismUpperPlural = _toUpperPlural(mechanism);
 
     // addEvent and addHelper functions.
-    Uni.Plugin.prototype['add' + mechanismUpper] = function (template, name, obj) {
+    UniPlugin.prototype['add' + mechanismUpper] = function (template, name, obj) {
         if (Meteor.isClient) {
             // Because we can override templates, we need to look
             // using getTemplate to find out the right template.
@@ -122,7 +122,7 @@ _(['events', 'helpers']).each(function (mechanism) {
 
 
     // addHelpers and addEvents functions.
-    Uni.Plugin.prototype['add' + mechanismUpperPlural] = function (template, obj) {
+    UniPlugin.prototype['add' + mechanismUpperPlural] = function (template, obj) {
         if (Meteor.isClient) {
             var self = this;
             _(obj).each(function (prop, name) {
@@ -133,7 +133,7 @@ _(['events', 'helpers']).each(function (mechanism) {
 
 
     // removeEvent and removeHelper functions.
-    Uni.Plugin.prototype['remove' + mechanismUpper] = function (template, name) {
+    UniPlugin.prototype['remove' + mechanismUpper] = function (template, name) {
         if (Meteor.isClient) {
             var actualTemplate = this.getTemplate(template),
                 mechanismRegister = this.registry[mechanism];
@@ -146,7 +146,7 @@ _(['events', 'helpers']).each(function (mechanism) {
 
 
     // getEvent and getHelper functions.
-    Uni.Plugin.prototype['get' + mechanismUpper] = function (template, name) {
+    UniPlugin.prototype['get' + mechanismUpper] = function (template, name) {
         if (Meteor.isClient) {
             var actualTemplate = this.getTemplate(template),
                 mechanismRegister = this.registry[mechanism];
@@ -158,7 +158,7 @@ _(['events', 'helpers']).each(function (mechanism) {
     };
 });
 
-_(Uni.Plugin.prototype).extend({
+_(UniPlugin.prototype).extend({
     inits: [],
     init: function() {
         var plugin = this;

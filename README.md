@@ -1,3 +1,5 @@
+# ** DEPRECATED **
+
 ## Plugin creation tutorial
 
 **Check universe-news and universe-chat (and add-ons to them) for example.**
@@ -22,7 +24,7 @@ Package.on_use(function (api) {
 Now lets create some js files. My package gonna provide some ultra useful features like outputting animal noises on javascript console, so let's called it UniAnimals.
 
 ```
-UniAnimals = new Uni.Plugin('UniAnimals', {
+UniAnimals = new UniPlugin('UniAnimals', {
     path: '/muu'
 });
 

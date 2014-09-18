@@ -1,4 +1,4 @@
-Uni.Plugin.prototype.inits.push(function initRoutes() {
+UniPlugin.prototype.inits.push(function initRoutes() {
     var plugin = this;
     Router.map(function () {
         var router = this;
