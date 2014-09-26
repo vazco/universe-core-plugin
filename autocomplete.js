@@ -3,7 +3,7 @@ UniPlugin = {};
 // fake functions for autocomplete
 // this file in not used in meteor
 
-UniPlugin.prototype.addMethod = function (name, obj) {
+UniPlugin.prototype.addMethod = function (name, obj, override) {
 };
 UniPlugin.prototype.addMethods = function (obj) {
 };
