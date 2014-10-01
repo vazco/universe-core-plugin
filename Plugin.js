@@ -71,8 +71,8 @@ _(mechanisms).each(function (mechanism) {
     var mechanismUpper = _toUpperSingular(mechanism);
     var mechanismUpperPlural = _toUpperPlural(mechanism);
 
-    UniPlugin.prototype['add' + mechanismUpper] = function (name, obj) {
-        if (this.registry[mechanism][name]) {
+    UniPlugin.prototype['add' + mechanismUpper] = function (name, obj, override) {
+        if (this.registry[mechanism][name] && !override) {
             console.log(mechanismUpper + ' ' + name + ' already exists.');
         } else {
             this.registry[mechanism][name] = obj;
