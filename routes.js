@@ -3,9 +3,7 @@ UniPlugin.prototype.inits.push(function initRoutes() {
     Router.map(function () {
         var router = this;
         _(plugin.registry.routes).each(function (options, name) {
-            if (!options.template) {
-                options.template = plugin.getTemplate(name);
-            }
+            options.template = plugin.getTemplate(options.template || name);
             router.route(name, options);
         });
     });
