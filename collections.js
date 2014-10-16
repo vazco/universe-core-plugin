@@ -4,7 +4,7 @@ UniPlugin.prototype.inits.push(function initCollections() {
         var collection = new UniCollection(name, options);
 
         // run callback
-        if (options.cb) {
+        if (options && _.isObject(options) && options.cb) {
             options.cb(collection)
         }
 
