@@ -20,7 +20,7 @@ UniPlugin = function(name) {
     this.constructor.plugins = this.constructor.plugins || [];
     this.constructor.plugins.push(this);
 
-    console.log('Created new plugin', this.name, this);
+    //console.log('Created new plugin', this.name, this);
 };
 
 UniPlugin.init = function (cb) {
