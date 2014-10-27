@@ -4,8 +4,8 @@ UniPlugin.prototype.inits.push(function initCollections() {
         var collection = new UniCollection(name, options);
 
         // run callback
-        if (options && _.isObject(options) && options.cb) {
-            options.cb(collection)
+        if (_.isObject(options) && options.onInit) {
+            options.onInit(collection)
         }
 
         plugin[name] = collection;
