@@ -29,3 +29,28 @@ Template.templateName.helpers({}) -> UniPlugin.addHelpers('templateName', {})
 Meteor.publish('name', function) -> UniPlugin.addPublication('name', function)
 
 ```
+
+##Examples
+
+###Creating collections
+
+Meteor example:
+
+```
+Collection = new Mongo.Collection('Collection');
+Collection.allow({
+	insert: function(){return true;}
+})
+```
+
+Universe example:
+
+```
+UniPlugin.addCollection('Collection', {
+	onInit: function(collection){
+		collection.allow({
+			insert: function(){return true;}
+		})
+	}
+})
+```
