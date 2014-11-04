@@ -55,7 +55,7 @@ UniPlugin.addCollection('Collection', {
 })
 ```
 
-### Creating methods and publications (hint: it is exacly the same).
+### Creating methods and publications (hint: it is exactly the same).
 
 Meteor example:
 
