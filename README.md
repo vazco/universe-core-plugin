@@ -78,3 +78,41 @@ UniPlugin.addPublication('publication', function(){});
 
 }
 ```
+
+
+### Events, helpers and overriding templates.
+
+Meteor example:
+
+```
+Template.templateName.events({
+	'click': function(){}
+});
+
+Template.templateName.events({
+	'helper': function(){}
+});
+```
+
+Universe example:
+
+```
+MyPlugin.addEvents('templateName' {
+	'click': function(){}
+});
+
+MyPlugin.addHelpers('templateName' {
+	'helper': function(){}
+});
+```
+
+#### Override
+
+If you want to override 'templateName' with 'newTemplate' you need to call setTemplate function on MyPlugin.
+
+```
+MyPlugin.setTemplate('templateName', 'newTemplate')
+
+```
+
+Now all events and helpers previously on 'templateName' will now be called on 'newTemplate'.
