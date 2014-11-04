@@ -3,18 +3,18 @@
 ##About
 This package provides API to delay some of meteor mechanisms in order to be able to chage it in application code.
 
-## Universe to Meteor translation
+## Meteor to Universe translation
 
 ```
-UniPlugin.addMethods({}) -> Meteor.methods({})
-```
-
-```
-UniPlugin.addCollection('name', {}) -> new Mongo.Collection('name', {})
+Meteor.methods({}) -> UniPlugin.addMethods({})
 ```
 
 ```
-UniPlugin.addRoute('name', {}) -> Router.route('name', {})
+new Mongo.Collection('name', {}) -> UniPlugin.addCollection('name', {})
+```
+
+```
+Router.route('name', {}) -> UniPlugin.addRoute('name', {})
 ```
 
 ```
@@ -22,10 +22,10 @@ UniPlugin.addEvents('templateName', {}) -> Template.templateName.events({})
 ```
 
 ```
-UniPlugin.addHelpers('templateName', {}) -> Template.templateName.helpers({})
+Template.templateName.helpers({}) -> UniPlugin.addHelpers('templateName', {})
 ```
 
 ```
-UniPlugin.addPublication('name', function) -> Meteor.publish('name', function)
+Meteor.publish('name', function) -> UniPlugin.addPublication('name', function)
 
 ```
