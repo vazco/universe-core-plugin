@@ -54,3 +54,27 @@ UniPlugin.addCollection('Collection', {
 	}
 })
 ```
+
+### Creating methods and publications (hint: it is exacly the same).
+
+Meteor example:
+
+```
+Meteor.methods({
+	method: function(){}
+});
+
+Meteor.publish('publication', function(){});
+```
+
+Universe example:
+
+```
+UniPlugin.addMethods({
+	method: function(){}
+});
+
+UniPlugin.addPublication('publication', function(){});
+
+}
+```
