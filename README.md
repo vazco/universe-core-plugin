@@ -18,7 +18,7 @@ Router.route('name', {}) -> UniPlugin.addRoute('name', {})
 ```
 
 ```
-UniPlugin.addEvents('templateName', {}) -> Template.templateName.events({})
+Template.templateName.events({}) -> UniPlugin.addEvents('templateName', {})
 ```
 
 ```
