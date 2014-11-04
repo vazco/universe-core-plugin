@@ -6,31 +6,47 @@ This package provides API to delay some of meteor mechanisms in order to be able
 ## Meteor to Universe translation
 
 ```
-Meteor.methods({}) -> UniPlugin.addMethods({})
+Meteor.methods({}) -> MyPlugin.addMethods({})
 ```
 
 ```
-new Mongo.Collection('name', {}) -> UniPlugin.addCollection('name', {})
+new Mongo.Collection('name', {}) -> MyPlugin.addCollection('name', {})
 ```
 
 ```
-Router.route('name', {}) -> UniPlugin.addRoute('name', {})
+Router.route('name', {}) -> MyPlugin.addRoute('name', {})
 ```
 
 ```
-Template.templateName.events({}) -> UniPlugin.addEvents('templateName', {})
+Template.templateName.events({}) -> MyPlugin.addEvents('templateName', {})
 ```
 
 ```
-Template.templateName.helpers({}) -> UniPlugin.addHelpers('templateName', {})
+Template.templateName.helpers({}) -> MyPlugin.addHelpers('templateName', {})
 ```
 
 ```
-Meteor.publish('name', function) -> UniPlugin.addPublication('name', function)
+Meteor.publish('name', function) -> MyPlugin.addPublication('name', function)
 
 ```
 
 ##Examples
+
+###Creating plugin
+
+In package code:
+```
+MyPlugin = new UniPlugin('myPlugin');
+
+```
+
+In project code (as late as possible):
+
+** This is very important, nothing will work without it**
+
+```
+UniPlugin.init()
+```
 
 ###Creating collections
 
@@ -46,7 +62,7 @@ Collection.allow({
 Universe example:
 
 ```
-UniPlugin.addCollection('Collection', {
+MyPlugin.addCollection('Collection', {
 	onInit: function(collection){
 		collection.allow({
 			insert: function(){return true;}
@@ -54,6 +70,8 @@ UniPlugin.addCollection('Collection', {
 	}
 })
 ```
+
+** Created collections can be later access by ``` MyPlugin.Collection ``` reference **
 
 ### Creating methods and publications (hint: it is exactly the same).
 
@@ -70,11 +88,11 @@ Meteor.publish('publication', function(){});
 Universe example:
 
 ```
-UniPlugin.addMethods({
+MyPlugin.addMethods({
 	method: function(){}
 });
 
-UniPlugin.addPublication('publication', function(){});
+MyPlugin.addPublication('publication', function(){});
 
 }
 ```
