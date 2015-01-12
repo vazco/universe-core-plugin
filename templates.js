@@ -16,3 +16,7 @@ _(UniPlugin.prototype).extend({
         return this.registry.templates[name] = newName;
     }
 });
+
+UI.registerHelper('uniGetTemplate', function (templateName) {
+    return UniPlugin.getTemplate(templateName);
+});

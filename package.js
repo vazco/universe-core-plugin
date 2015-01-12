@@ -8,7 +8,8 @@ Package.on_use(function (api) {
         'underscore',
         'vazco:universe-core',
         'aldeed:collection2',
-        'iron:router'
+        'iron:router',
+        'ui'
     ]);
 
     api.imply([
