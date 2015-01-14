@@ -16,3 +16,9 @@ _(UniPlugin.prototype).extend({
         return this.registry.templates[name] = newName;
     }
 });
+
+Template.uniDynamic.helpers({
+    getTemplate: function () {
+        return Template[UniPlugin.getTemplate(this)] || null;
+    }
+});
