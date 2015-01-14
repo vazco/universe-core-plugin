@@ -17,7 +17,7 @@ _(UniPlugin.prototype).extend({
     }
 });
 
-Template.uniTemplate.helpers({
+Template.uniDynamic.helpers({
     getTemplate: function () {
         return Template[UniPlugin.getTemplate(this)] || null;
     }
