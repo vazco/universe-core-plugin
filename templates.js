@@ -17,6 +17,8 @@ _(UniPlugin.prototype).extend({
     }
 });
 
-UI.registerHelper('uniGetTemplate', function (templateName) {
-    return UniPlugin.getTemplate(templateName);
+Template.uniTemplate.helpers({
+    getTemplate: function () {
+        return Template[UniPlugin.getTemplate(this)] || null;
+    }
 });

@@ -8,9 +8,10 @@ Package.on_use(function (api) {
         'underscore',
         'vazco:universe-core',
         'aldeed:collection2',
-        'iron:router',
-        'ui'
+        'iron:router'
     ]);
+
+    api.use(['templating', 'ui'], 'client');
 
     api.imply([
         'vazco:universe-core'
@@ -24,6 +25,7 @@ Package.on_use(function (api) {
     ]);
 
     api.add_files([
+        'templates.html',
         'templates.js',
         'eventsAndHelpers.js'
     ], 'client');
