@@ -1,3 +1,7 @@
+'use strict';
+
+/* global UniPlugin: true */
+
 UniPlugin = function(name) {
     if (!(this instanceof UniPlugin)) {
         throw new Error('UniPlugin must be created with "new" keyword');
@@ -83,7 +87,7 @@ _(mechanisms).each(function (mechanism) {
         var self = this;
         _(obj).each(function (prop, name) {
             self['add' + mechanismUpper](name, prop);
-        })
+        });
     };
 
     UniPlugin.prototype['remove' + mechanismUpper] = function (name) {
@@ -123,7 +127,7 @@ if (Meteor.isClient) {
             var self = this;
             _(obj).each(function (prop, name) {
                 self['add' + mechanismUpper](template, name, prop);
-            })
+            });
         };
 
 

@@ -1,3 +1,5 @@
+'use strict';
+
 Package.describe({
     name: 'vazco:universe-core-plugin',
     summary: 'Universe CMS Plugin package'
@@ -36,5 +38,5 @@ Package.on_use(function (api) {
 
     api.export([
         'UniPlugin'
-    ])
+    ]);
 });

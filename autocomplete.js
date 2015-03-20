@@ -1,3 +1,5 @@
+/* jshint ignore:start */
+
 UniPlugin = {};
 
 // fake functions for autocomplete
@@ -79,3 +81,5 @@ if (Meteor.isClient) {
     UniPlugin.prototype.getPublication = function (name) {
     };
 }
+
+/* jshint ignore:end */

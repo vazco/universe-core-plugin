@@ -1,3 +1,5 @@
+'use strict';
+
 UniPlugin.prototype._getTemplateInstance = function(template){
     var actualTemplate = this.getTemplate(template),
         error;
