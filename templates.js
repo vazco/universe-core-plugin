@@ -1,3 +1,5 @@
+'use strict';
+
 _(UniPlugin).extend({
     templates: {},
     getTemplate: function (name) {

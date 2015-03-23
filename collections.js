@@ -1,3 +1,5 @@
+'use strict';
+
 UniPlugin.prototype.inits.push(function initCollections() {
     var plugin = this;
     _(this.registry.collections).each(function (options, name) {
@@ -5,7 +7,7 @@ UniPlugin.prototype.inits.push(function initCollections() {
 
         // run callback
         if (_.isObject(options) && options.onInit) {
-            options.onInit(collection)
+            options.onInit(collection);
         }
 
         plugin[name] = collection;

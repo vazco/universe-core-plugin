@@ -1,3 +1,5 @@
+'use strict';
+
 UniPlugin.prototype.inits.push(function initRoutes() {
     var plugin = this;
     Router.map(function () {
