@@ -1,4 +1,10 @@
-#Universe Core Plugin
+# Universe Core Plugin
+
+**Abandoned**
+Instead using Template overrides module from this package 
+you can use [Template Extension](https://atmospherejs.com/aldeed/template-extension)
+
+Other part of this package is unnecessary in Universe Environment
 
 ##About
 This package provides API to delay some of meteor mechanisms in order to be able to chage it in application code.
