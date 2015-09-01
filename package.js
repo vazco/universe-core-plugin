@@ -3,21 +3,21 @@
 Package.describe({
     name: 'vazco:universe-core-plugin',
     summary: 'Universe CMS Plugin package -- DEPRECATED',
-    version: '0.0.3'
+    version: '0.0.4'
 });
 
 Package.on_use(function (api) {
     api.use([
-        'underscore@1.0.1',
-        'vazco:universe-core@1.5.2',
-        'aldeed:collection2@2.2.0',
-        'iron:router@1.0.0'
+        'underscore',
+        'vazco:universe-core',
+        'aldeed:collection2',
+        'iron:router'
     ]);
 
-    api.use(['templating@1.0.9', 'ui@1.0.4'], 'client');
+    api.use(['templating', 'ui'], 'client');
 
     api.imply([
-        'vazco:universe-core@1.5.2',
+        'vazco:universe-core',
     ]);
 
     api.add_files([
