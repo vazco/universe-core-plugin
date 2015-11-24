@@ -17,7 +17,7 @@ Package.on_use(function (api) {
     api.use(['templating', 'ui'], 'client');
 
     api.imply([
-        'vazco:universe-core',
+        'vazco:universe-core'
     ]);
 
     api.add_files([
