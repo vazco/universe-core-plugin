@@ -10,7 +10,6 @@ Package.on_use(function (api) {
     api.use([
         'underscore',
         'vazco:universe-core',
-        'aldeed:collection2',
         'iron:router'
     ]);
 
