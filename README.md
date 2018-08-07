@@ -1,8 +1,15 @@
-## Abandonware
+<h1 align="center">
+    <a href="https://github.com/vazco">vazco</a>/Universe Core Plugin
+</h1>
 
-# Universe Core Plugin
+&nbsp;
 
-**Abandoned**
+<h3 align="center">
+  -- Abandonware. This package is deprecated! --
+</h3>
+
+&nbsp;
+
 Instead using Template overrides module from this package 
 you can use [Template Extension](https://atmospherejs.com/aldeed/template-extension)
 
@@ -142,3 +149,9 @@ MyPlugin.setTemplate('templateName', 'newTemplate')
 ```
 
 Now all events and helpers previously on 'templateName' will now be called on 'newTemplate'.
+
+### License
+
+<img src="https://vazco.eu/banner.png" align="right">
+
+**Like every package maintained by [Vazco](https://vazco.eu/), Universe Core Plugin is [MIT licensed](https://github.com/vazco/uniforms/blob/master/LICENSE).**
